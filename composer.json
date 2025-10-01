@@ -1,0 +1,15 @@
+{
+    "name": "jp.behrens/brickpage",
+    "autoload": {
+        "psr-4": {
+            "Brick\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "bitka-de",
+            "email": "behrens.ka@icloud.com"
+        }
+    ],
+    "require": {}
+}
