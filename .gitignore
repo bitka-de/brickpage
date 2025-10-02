@@ -1,1 +1,21 @@
 vendor/
+node_modules/
+
+# Build Files (Vite Output)
+public/src/
+public/.vite/
+
+# Development Files
+.env
+.env.local
+.env.*.local
+
+# IDE Files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS Files
+.DS_Store
+Thumbs.db

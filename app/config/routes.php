@@ -17,5 +17,3 @@ return [
   ['GET', '/admin', 'view.home', ['auth', 'hello']], // Mehrere Middlewares über String-Aliases
   ['GET', '/about', 'AboutController.show'],
 ];
-
-

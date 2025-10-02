@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+/* Custom Styles */
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* Brick Framework Custom Components */
+@layer components {
+  .brick-card {
+    @apply bg-white border border-gray-200 rounded-lg p-6 shadow-sm;
+  }
+
+  .brick-button {
+    @apply px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors;
+  }
+
+  .brick-container {
+    @apply container mx-auto px-4;
+  }
+}
