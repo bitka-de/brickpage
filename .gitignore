@@ -5,6 +5,9 @@ node_modules/
 public/src/
 public/.vite/
 
+# Backup Files
+app/backup/views/
+
 # Development Files
 .env
 .env.local

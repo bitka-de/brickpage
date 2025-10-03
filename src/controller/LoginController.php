@@ -11,14 +11,17 @@ class LoginController
    */
   public function showLogin(): void
   {
+    // Prüfen ob dies eine Vorschau-Anfrage ist
+    $isPreview = isset($_GET['preview']) && $_GET['preview'] === 'true';
+    
     // Prüfen ob Benutzer bereits eingeloggt ist
-    if ($this->isLoggedIn()) {
-      // Bereits eingeloggt → zum Dashboard weiterleiten
+    if ($this->isLoggedIn() && !$isPreview) {
+      // Bereits eingeloggt → zum Dashboard weiterleiten (außer bei Vorschau)
       header('Location: /' . ADMIN_DASHBOARD);
       exit;
     }
 
-    // Nicht eingeloggt → Login-Seite anzeigen
+    // Login-Seite anzeigen (auch bei eingeloggten Usern wenn Vorschau-Modus)
     require_once VIEW_DIR . '/auth/login.php';
   }
 

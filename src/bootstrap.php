@@ -19,6 +19,9 @@ require VENDOR_DIR . '/autoload.php';
 // Globale Helper-Funktionen laden
 require SRC_DIR . '/helpers.php';
 
+// Controller laden
+require SRC_DIR . '/controller/ViewManagerController.php';
+
 // Development-Modus aus Konfiguration laden
 $isDev = Brick\Core\Config::get('dev_mode', false);
 Brick\Core\AssetHelper::setDev($isDev);

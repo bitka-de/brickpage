@@ -1,5 +1,120 @@
 # brickpage
 
+## Task #5: View Management System & Code Editor mit Live-Vorschau - 3. Oktober 2025
+
+Implementierung eines umfassenden View-Management-Systems mit integriertem Code-Editor für Live-Entwicklung:
+
+### View Management Features:
+- **View Manager Controller**: RESTful API für View-Verwaltung mit CRUD-Operationen
+- **Template Generator**: Automatische View-Erstellung mit vorgefertigten Templates (Basic, Form, Table, Empty)
+- **File System Integration**: Rekursives Scannen und Mapping von Views zu Routen
+- **Protected Views**: Schutz kritischer System-Views vor versehentlichem Löschen
+- **Route Detection**: Automatische Erkennung welche Routen auf Views verweisen
+- **Controller Analysis**: Statische Code-Analyse um zu erkennen welche Controller Views verwenden
+
+### Integrated Code Editor:
+- **CodeMirror Integration**: Vollwertiger Code-Editor mit PHP/HTML/CSS/JS Syntax-Highlighting
+- **Live Preview**: Echtzeit-Vorschau mit automatischer Aktualisierung (1s Debounce)
+- **Split-View Interface**: Resizable Split-Panel zwischen Editor und Vorschau
+- **Backup System**: Automatische Backups bei jedem Speichern mit Cleanup (max. 5 Backups)
+- **Responsive Preview**: Device-spezifische Vorschau (Desktop/Tablet/Mobile) mit echten Viewport-Größen
+- **Keyboard Shortcuts**: Strg+S (Speichern), Strg+P (Preview toggle), Strg+1/2/3 (Viewports)
+
+### Route Parameter Support:
+- **Dynamic Routing**: Unterstützung für URL-Parameter mit `{parameter}` Syntax
+- **Parameter Injection**: Automatische Parameter-Übergabe an Controller-Methoden
+- **Route Matching**: Erweiterte Route-Matching-Engine mit Parameter-Extraktion
+- **Flexible URLs**: Unterstützung für `/editor/view/{viewName}` und ähnliche Muster
+
+### Admin Dashboard Erweiterungen:
+- **Views Section**: Vollständige View-Verwaltung mit Such- und Filterfunktionen
+- **Route Management**: Erweiterte Routen-Tabelle mit Such-, Bearbeitungs- und Testfunktionen
+- **Quick Actions**: Direkter Zugang zu Editor, View-Erstellung und Route-Testing
+- **Real-time Updates**: Live-Aktualisierung nach View-Erstellungen und -Löschungen
+
+### Template System:
+```php
+// Verfügbare View-Templates
+'basic'  => HTML-Seite mit Navigation und Content-Bereich
+'form'   => Formular-Template mit Validierung und Styling
+'table'  => Daten-Tabelle mit Sorting und Actions
+'empty'  => Minimales HTML-Grundgerüst
+```
+
+### Code Editor Features:
+```javascript
+// CodeMirror Konfiguration
+mode: "application/x-httpd-php",
+theme: "monokai",
+lineNumbers: true,
+autoCloseBrackets: true,
+matchBrackets: true,
+foldGutter: true,
+lineWrapping: true
+```
+
+### API Endpoints:
+```php
+// View Management API
+['POST', '/api/views/create', 'ViewManagerController.createView', ['auth']],
+['GET',  '/api/views/list',   'ViewManagerController.listViews', ['auth']],
+['DELETE', '/api/views/delete', 'ViewManagerController.deleteView', ['auth']],
+
+// Code Editor Routes
+['GET',  '/editor/view/{viewName}',    'EditorController.view', ['auth']],
+['POST', '/editor/save/{viewName}',    'EditorController.save', ['auth']],
+['POST', '/editor/preview/{viewName}', 'EditorController.preview', ['auth']],
+```
+
+### Editor Security Features:
+- **Input Validation**: Strenge Validierung von View-Namen und Pfaden
+- **Path Traversal Protection**: Schutz vor Directory-Traversal-Attacken
+- **Authentication Required**: Alle Editor-Funktionen erfordern Authentication
+- **Backup & Recovery**: Automatische Backups vor jeder Änderung
+- **Error Handling**: Robuste Fehlerbehandlung mit benutzerfreundlichen Meldungen
+
+### Live Preview System:
+```php
+// Preview-Generierung mit Temporary Files
+$tempFile = tempnam(sys_get_temp_dir(), 'preview_' . $viewName);
+file_put_contents($tempPhpFile, $content);
+include $tempPhpFile; // Sichere Ausführung in isolierter Umgebung
+```
+
+### UI/UX Verbesserungen:
+- **Responsive Split-Panels**: Intelligente Anpassung an verschiedene Bildschirmgrößen
+- **Toast Notifications**: Benutzerfreundliche Erfolgs- und Fehlermeldungen
+- **Loading States**: Visuelle Rückmeldung bei längeren Operationen
+- **Unsaved Changes Warning**: Warnung vor Datenverlust bei Navigation
+- **Real-time File Size**: Live-Anzeige der Dateigröße und Änderungsanzahl
+
+### Development Workflow:
+1. **View Creation**: Neue Views über Dashboard mit Template-Auswahl erstellen
+2. **Instant Editing**: Direkter Editor-Zugang mit einem Klick
+3. **Live Development**: Änderungen in Echtzeit in der Vorschau sehen
+4. **Multi-Device Testing**: Verschiedene Viewport-Größen sofort testen
+5. **Safe Deployment**: Backup-System schützt vor Datenverlust
+
+### File Organization:
+```
+src/controller/
+├── ViewManagerController.php  - View CRUD Operations
+├── EditorController.php       - Code Editor Backend
+└── LoginController.php        - Enhanced with Preview Support
+
+src/core/
+├── Editor.php                 - Editor UI Generation
+└── Router.php                 - Enhanced with Parameter Support
+
+app/backup/views/              - Automatic View Backups
+```
+
+### Deutsche Lokalisierung:
+- **Vollständig deutsche UI**: Alle Editor- und Management-Interfaces
+- **Benutzerfreundliche Fehlermeldungen**: Klare deutsche Error-Messages
+- **Intuitive Navigation**: Deutsche Labels und Tooltips
+- **Help & Documentation**: Deutsche Hilfetexte und Keyboard-Shortcuts
+
 ## Task #4: Vollständiges User Authentication System mit deutscher UI - 3. Oktober 2025
 
 Implementierung eines professionellen Benutzer-Authentifizierungssystems mit sicherer Session-Verwaltung und moderner deutscher Benutzeroberfläche:

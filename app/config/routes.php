@@ -20,4 +20,12 @@ return [
   ['GET', '/dashboard', 'view.admin/dashboard', ['auth']],
   ['GET', '/admin', 'view.admin/dashboard', ['auth']],
   ['GET', '/about', 'AboutController.show'],
+  ['GET', '/test-view-manager', 'ViewManagerController.test'],
+  ['POST', '/api/views/create', 'ViewManagerController.createView', ['auth']],
+  ['GET', '/api/views/list', 'ViewManagerController.listViews', ['auth']],
+  ['DELETE', '/api/views/delete', 'ViewManagerController.deleteView', ['auth']],
+  ['GET', '/editor', 'EditorController.renderView', ['auth']],
+  ['GET', '/editor/view/{viewName}', 'EditorController.view', ['auth']],
+  ['POST', '/editor/save/{viewName}', 'EditorController.save', ['auth']],
+  ['POST', '/editor/preview/{viewName}', 'EditorController.preview', ['auth']],
 ];

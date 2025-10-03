@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 
 <head>
   <meta charset="UTF-8">
@@ -12,7 +12,7 @@
 
 <body>
   <div class="container mx-auto px-4 py-8">
-    <h1 class="text-4xl font-bold text-stone-900 mb-4">🔥 Welcome to <?= _get('app.name') ?>!</h1>
+    <h1 class="text-4xl font-bold text-stone-900 mb-4">🔥 Hallo bei <?= _get('app.name') ?>!</h1>
     <p class="text-lg text-gray-700 mb-6">This is the home page of our website.</p>
 
     <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
