@@ -76,12 +76,18 @@ class Router
                     return;
                 }
 
-                if (class_exists($controller) && method_exists($controller, $action)) {
-                    (new $controller())->$action();
+                // Controller mit Brick\Controller Namespace
+                $controllerClass = "Brick\\Controller\\{$controller}";
+                
+                if (class_exists($controllerClass) && method_exists($controllerClass, $action)) {
+                    (new $controllerClass())->$action();
                     return;
                 }
 
-                echo "Controller: {$controller} not found";
+                # Eventuell später weitere Namensräume unterstützen
+                # z. B. "Api\UserController" -> "Brick\Controller\Api\UserController"
+
+                echo "Controller: {$controllerClass} not found";
                 return;
             }
         }

@@ -1,0 +1,126 @@
+/* Login System Components */
+@layer components {
+  .login-container {
+    @apply grid min-h-screen p-4 bg-gradient-to-br from-slate-100 to-blue-100 place-items-center;
+  }
+
+  .login-card {
+    @apply w-full max-w-sm p-6 border border-white shadow-xl bg-gradient-to-b from-white/70 rounded-2xl;
+  }
+
+  .login-header {
+    @apply mb-8 space-y-4 text-center;
+  }
+
+  .login-logo {
+    @apply grid mx-auto shadow-lg size-16 bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl place-items-center shadow-blue-500/25;
+  }
+
+  .login-title {
+    @apply text-2xl font-bold tracking-tight text-gray-900;
+  }
+
+  .login-subtitle {
+    @apply text-sm text-gray-600;
+  }
+
+  .login-form {
+    @apply space-y-4;
+  }
+
+  .login-field {
+    @apply space-y-2;
+  }
+
+  .login-label {
+    @apply block text-xs text-gray-900;
+  }
+
+  .login-input-wrapper {
+    @apply relative;
+  }
+
+  .login-input-icon {
+    @apply absolute inset-y-0 left-0 grid pl-3 pointer-events-none place-items-center;
+  }
+
+  .login-input {
+    @apply w-full py-3 pl-10 pr-4 transition-colors bg-white border border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 placeholder:text-gray-400;
+  }
+
+  .login-checkbox-wrapper {
+    @apply flex items-center justify-between text-sm;
+  }
+
+  .login-checkbox-label {
+    @apply flex items-center gap-2 cursor-pointer;
+  }
+
+  .login-checkbox {
+    @apply text-blue-600 border-gray-300 rounded size-4 focus:ring-blue-500/20 focus:ring-2;
+  }
+
+  .login-forgot-link {
+    @apply font-medium text-blue-600 transition-colors hover:text-blue-500;
+  }
+
+  .login-submit-button {
+    @apply w-full py-3 px-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium rounded-xl hover:from-blue-700 hover:to-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:ring-offset-2 transition-all duration-200 transform hover:scale-[1.02] shadow-lg shadow-blue-500/25;
+  }
+
+  .login-divider {
+    @apply relative;
+  }
+
+  .login-divider-line {
+    @apply absolute inset-0 grid place-items-center;
+  }
+
+  .login-divider-text {
+    @apply relative grid place-items-center;
+  }
+
+  .login-social-buttons {
+    @apply grid grid-cols-2 gap-3;
+  }
+
+  .login-social-button {
+    @apply flex items-center justify-center gap-2 py-2.5 px-4 border border-gray-200 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 transition-colors;
+  }
+
+  .login-nav-links {
+    @apply space-y-3 text-center;
+  }
+
+  .login-nav-link {
+    @apply font-medium text-blue-600 transition-colors hover:text-blue-500;
+  }
+
+  .login-back-link {
+    @apply inline-flex items-center gap-2 font-medium text-blue-600 transition-colors hover:text-blue-500;
+  }
+
+  .login-debug {
+    @apply p-4 border border-yellow-200 bg-yellow-50 rounded-xl;
+  }
+
+  .login-debug-content {
+    @apply flex gap-3;
+  }
+
+  .login-debug-icon {
+    @apply size-5 text-yellow-600 shrink-0 mt-0.5;
+  }
+
+  .login-debug-text {
+    @apply space-y-1;
+  }
+
+  .login-debug-title {
+    @apply text-sm font-medium text-yellow-800;
+  }
+
+  .login-debug-info {
+    @apply text-sm text-yellow-700;
+  }
+}

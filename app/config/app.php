@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 return [
     'env' => 'development', # 'production' or 'development'
-    'debug' => true, # true or false
+    'debug' => false, # true or false
     'dev_mode' => true, # true or false
 
     'app' => [

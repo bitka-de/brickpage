@@ -10,6 +10,10 @@ const APP_DIR = ROOT_DIR . '/app';
 const CONFIG_DIR = APP_DIR . '/config';
 const VIEW_DIR = APP_DIR . '/views';
 
+const ADMIN_DASHBOARD = 'dashboard';
+const ADMIN_AFTER_LOGIN = 'dashboard';
+const ADMIN_AFTER_LOGOUT = 'login';
+
 require VENDOR_DIR . '/autoload.php';
 
 // Globale Helper-Funktionen laden

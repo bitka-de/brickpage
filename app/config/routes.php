@@ -13,7 +13,11 @@ declare(strict_types=1);
 
 return [
   ['GET', '/', 'view.home'],
-  ['GET', '/hello', 'view.home', ['hello']], 
-  ['GET', '/admin', 'view.home', ['auth', 'hello']], // Mehrere Middlewares über String-Aliases
+  ['GET', '/login', 'LoginController.showLogin'],
+  ['POST', '/login', 'LoginController.authenticate'],
+  ['GET', '/logout', 'LoginController.logout'],
+  ['GET', '/debug/users', 'LoginController.listUsers'],
+  ['GET', '/dashboard', 'view.admin/dashboard', ['auth']],
+  ['GET', '/admin', 'view.admin/dashboard', ['auth']],
   ['GET', '/about', 'AboutController.show'],
 ];
