@@ -1,12 +1,14 @@
 vendor/
 node_modules/
 
+
 # Build Files (Vite Output)
 public/src/
 public/.vite/
 
 # Backup Files
 app/backup/views/
+app/views/_*
 
 # Development Files
 .env

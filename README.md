@@ -1,4 +1,187 @@
-# brickpage
+````markdown
+<img src="./public/img/logo.png" alt="Brickpage — Logo" style="width:360px;max-width:100%;height:auto;display:block;margin:0;">
+
+## Task #6: App Settings Framework & Configuration Management - 4. Oktober 2025
+
+Implementierung eines umfassenden Konfigurationssystems mit der `app()` Funktion und Timezone-Management:
+
+### App Settings Framework:
+- **`app()` Helper Function**: Zentrale Funktion für Zugriff auf `app/config/settings.php` mit Dot-Notation
+- **Settings Configuration**: Strukturierte Website-Konfiguration getrennt von System-Konfiguration
+- **Timezone Integration**: Automatisches Setzen der PHP-Timezone aus den App-Settings
+- **Fallback System**: Robuste Fallback-Werte für fehlende Konfigurationsschlüssel
+- **Performance Optimierung**: Lazy Loading und Caching der Settings für bessere Performance
+
+### App() Function Features:
+```php
+// Dot-Notation Zugriff auf verschachtelte Arrays
+app('site.name')                    // => 'Mein Startup'
+app('site.timezone')               // => 'Europe/Berlin'
+app('theme.palette.primary')       // => '#1E88E5'
+app('navigation.0.label')          // => 'Home'
+app('pages.0.components.0.data.title') // => 'Schnell starten — sofort live'
+
+// Fallback-Werte für nicht existierende Schlüssel
+app('does.not.exist', 'Default')  // => 'Default'
+
+// Helper-Funktionen für häufige Abfragen
+app_has('site.name')               // => true/false
+app_all()                          // => komplettes Settings-Array
+```
+
+### Settings Configuration Structure:
+```php
+// app/config/settings.php - Website-spezifische Konfiguration
+return [
+  'site' => [
+    'name'     => 'Mein Startup',
+    'tagline'  => 'Code live, Build fast',
+    'language' => 'de',
+    'timezone' => 'Europe/Berlin',
+    'domain'   => 'www.meinstartup.de',
+  ],
+  'theme' => [
+    'template' => 'business',
+    'palette'  => [
+      'primary'   => '#1E88E5',
+      'secondary' => '#F5A623',
+    ],
+    'font'   => 'Inter',
+    'layout' => 'standard',
+  ],
+  'navigation' => [
+    ['label' => 'Home',      'path' => '/'],
+    ['label' => 'Über uns',  'path' => '/about'],
+    // ...weitere Navigation
+  ],
+  'integrations' => [
+    'analytics' => ['provider' => 'ga', 'tracking_id' => 'UA-XXXXX-Y'],
+    'mail'      => ['provider' => 'mailchimp', 'api_key' => 'xxx'],
+  ],
+  'publish' => [
+    'auto_ssl' => true,
+    'staging'  => true,
+  ],
+];
+```
+
+### Timezone Management:
+```php
+// Automatisches Timezone-Setup in bootstrap.php
+$timezone = app('site.timezone', 'UTC');
+date_default_timezone_set($timezone);
+
+// Alle PHP-Datumsfunktionen verwenden jetzt die konfigurierte Timezone
+echo date('Y-m-d H:i:s T'); // => '2025-10-04 13:40:47 CEST'
+```
+
+### Configuration Separation:
+- **`app/config/app.php`**: System- und Framework-Konfiguration (Development-Mode, Assets, etc.)
+- **`app/config/settings.php`**: Website- und Content-Konfiguration (Site-Name, Theme, Navigation)
+- **Separate Helper Functions**: 
+  - `_get()` für System-Config (app.php)
+  - `app()` für Website-Settings (settings.php)
+
+### Helper Functions Implementation:
+```php
+// In src/helpers.php erweitert
+$GLOBALS['_app_settings'] = null;
+
+function _init_app_settings(): void {
+    if ($GLOBALS['_app_settings'] === null) {
+        $settingsFile = CONFIG_DIR . '/settings.php';
+        $GLOBALS['_app_settings'] = file_exists($settingsFile) 
+            ? require $settingsFile 
+            : [];
+    }
+}
+
+function app(string $key, mixed $default = null): mixed {
+    _init_app_settings();
+    
+    $keys = explode('.', $key);
+    $value = $GLOBALS['_app_settings'];
+    
+    foreach ($keys as $segment) {
+        if (!is_array($value) || !array_key_exists($segment, $value)) {
+            return $default;
+        }
+        $value = $value[$segment];
+    }
+    
+    return $value;
+}
+```
+
+### Bootstrap Integration:
+```php
+// Timezone aus App-Settings in src/bootstrap.php
+require SRC_DIR . '/helpers.php';
+
+// Timezone aus App-Settings setzen
+$timezone = app('site.timezone', 'UTC');
+date_default_timezone_set($timezone);
+
+// Rest der Bootstrap-Logik...
+```
+
+### Usage Examples:
+```php
+// In Views - Website-Informationen
+<title><?= app('site.name') ?> - <?= app('site.tagline') ?></title>
+<html lang="<?= app('site.language') ?>">
+
+// Theme-Variablen für CSS
+<style>
+:root {
+  --primary-color: <?= app('theme.palette.primary') ?>;
+  --secondary-color: <?= app('theme.palette.secondary') ?>;
+}
+</style>
+
+// Navigation generieren
+<?php foreach (app('navigation', []) as $item): ?>
+  <a href="<?= $item['path'] ?>"><?= $item['label'] ?></a>
+<?php endforeach; ?>
+
+// Analytics Integration
+<?php if (app('integrations.analytics.tracking_id')): ?>
+  <script>
+    gtag('config', '<?= app("integrations.analytics.tracking_id") ?>');
+  </script>
+<?php endif; ?>
+```
+
+### Configuration Management Benefits:
+- **Trennung von Belangen**: System-Config vs. Website-Content getrennt
+- **Einfache Template-Syntax**: Kurze `app()` Aufrufe statt verschachtelter Arrays
+- **Typsicherheit**: Vollständige PHP-Konfiguration mit IDE-Unterstützung
+- **Performance**: Lazy Loading und Caching für optimale Geschwindigkeit
+- **Flexibilität**: Dot-Notation erlaubt beliebig tiefe Verschachtelung
+- **Robustheit**: Fallback-System verhindert fatale Fehler bei fehlenden Keys
+
+### File Changes in Task #6:
+```
+Modified Files:
+├── src/helpers.php              - app() Function und App-Settings-System
+├── src/bootstrap.php            - Timezone-Setup aus App-Settings
+├── app/config/settings.php      - Website-Konfigurationsstruktur
+├── app/views/home.php           - app() Function Integration
+├── app/views/admin/dashboard.php - Settings-Zugriff über app()
+└── tailwind.config.js           - Konfiguration Anpassungen
+
+Development Tools:
+├── test_app_function.php        - Temporäre Test-Datei (entfernt)
+├── debug_settings.php           - Debug-Hilfsdatei (entfernt)
+└── debug_detailed.php           - Detaillierte Config-Tests (entfernt)
+```
+
+### Future Settings Management:
+- Admin-Interface für Settings-Bearbeitung geplant
+- Visual Settings-Editor mit Live-Preview
+- Import/Export von Konfigurationen
+- Environment-spezifische Settings-Overrides
+- Validation und Schema-Definition für Settings
 
 ## Task #5: View Management System & Code Editor mit Live-Vorschau - 3. Oktober 2025
 

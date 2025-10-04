@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
+    "./app/bricks/**/*.{php,html}",           // Alle PHP und HTML Views
     "./app/views/**/*.{php,html}",           // Alle PHP und HTML Views
     "./app/assets/js/**/*.{js,ts,jsx,tsx}",  // JavaScript/TypeScript Dateien
     "./src/**/*.php",                        // PHP Framework-Dateien (falls Klassen HTML ausgeben)

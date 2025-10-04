@@ -18,6 +18,8 @@ return [
   ['GET', '/logout', 'LoginController.logout'],
   ['GET', '/debug/users', 'LoginController.listUsers'],
   ['GET', '/dashboard', 'view.admin/dashboard', ['auth']],
+  ['GET', '/settings', 'view.admin/settings', ['auth']],
+
   ['GET', '/admin', 'view.admin/dashboard', ['auth']],
   ['GET', '/about', 'AboutController.show'],
   ['GET', '/test-view-manager', 'ViewManagerController.test'],

@@ -19,6 +19,10 @@ require VENDOR_DIR . '/autoload.php';
 // Globale Helper-Funktionen laden
 require SRC_DIR . '/helpers.php';
 
+// Timezone aus App-Settings setzen
+$timezone = app('site.timezone', 'UTC');
+date_default_timezone_set($timezone);
+
 // Controller laden
 require SRC_DIR . '/controller/ViewManagerController.php';
 
