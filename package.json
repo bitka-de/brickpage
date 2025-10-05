@@ -4,9 +4,11 @@
   "description": "Implementierung eines flexiblen Middleware-Systems mit String-Alias-Registry:",
   "main": "index.js",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
+    "dev": "./scripts/set-dev-mode.sh && vite",
+    "build": "./scripts/set-prod-mode.sh && vite build",
     "preview": "vite preview",
+    "config:dev": "./scripts/set-dev-mode.sh",
+    "config:prod": "./scripts/set-prod-mode.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

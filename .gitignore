@@ -9,6 +9,7 @@ public/.vite/
 # Backup Files
 app/backup/views/
 app/views/_*
+app/views/**/_*
 
 # Development Files
 .env

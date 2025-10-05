@@ -24,7 +24,8 @@ $timezone = app('site.timezone', 'UTC');
 date_default_timezone_set($timezone);
 
 // Controller laden
-require SRC_DIR . '/controller/ViewManagerController.php';
+require SRC_DIR . '/Controller/ViewManagerController.php';
+require SRC_DIR . '/Controller/SettingsController.php';
 
 // Development-Modus aus Konfiguration laden
 $isDev = Brick\Core\Config::get('dev_mode', false);

@@ -1,32 +1,12 @@
 <?php
-// Aktuellen Benutzer aus Session laden
-use Brick\Controller\LoginController;
-
-$loginController = new LoginController();
-$currentUser = $loginController->getCurrentUser();
-$userName = $currentUser ? $currentUser['name'] : 'Unbekannter Benutzer';
-$userEmail = $currentUser ? $currentUser['email'] : '';
+$currentPage = 'Settings';
+include __DIR__ . '/../../bricks/dashboard/base.php';
 ?>
-<!DOCTYPE html>
-<html lang="<?= app('site.language'); ?>">
+      <!-- Main Content -->
+      <div class="p-4">
+        <h2 class="text-lg font-semibold">Willkommen zurück, <?= htmlspecialchars($userName) ?>!</h2>
+        <p class="mt-1 text-sm text-gray-600">Ihre E-Mail-Adresse lautet: <?= htmlspecialchars($userEmail) ?></p>
+      </div>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><?= app('site.name') ?> - Settings</title>
-  <!-- Asset Loading: Automatisch Dev/Production -->
-  <?= Brick\Core\AssetHelper::viteAssets() ?>
-  <link rel="icon" type="image/png" sizes="32x32" href="/img/fav/favicon-32x32.png">
 
-</head>
-
-<body class="bg-gray-100">
-
-  <?php include __DIR__ . '/../../bricks/dashboard/navbar.php'; ?>
-
-  <div class="container mx-auto mt-4">
-    Hier werden später die Settings verarbeitet
-  </div>
-</body>
-
-</html>
+<?php include __DIR__ . '/../../bricks/dashboard/end.php'; ?>

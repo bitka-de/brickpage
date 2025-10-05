@@ -3,9 +3,9 @@
 declare(strict_types=1);
 
 return [
-    'env' => 'development', # 'production' or 'development'
+    'env' => 'production', # 'production' or 'development'
     'debug' => false, # true or false
-    'dev_mode' => true, # true or false
+    'dev_mode' => false, # true or false
 
     'app' => [
         'name' => 'Brickpage',

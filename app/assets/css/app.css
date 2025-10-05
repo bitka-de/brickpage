@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "./login.css";
+@import "./admin.css";
 
 /* Custom Styles */
 body {

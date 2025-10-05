@@ -1,0 +1,37 @@
+/* Login System Components */
+@layer components {
+  .admin-layout {
+    @apply flex flex-col w-full min-h-screen bg-gradient-to-br from-slate-900/95 via-slate-800/90 to-slate-900/95;
+  }
+
+  .admin-layout__header {
+    @apply flex items-center justify-between w-full px-4 py-2;
+  }
+  .admin-layout__content {
+    @apply flex w-full gap-2 pl-4 grow;
+  }
+
+  .admin-layout__main {
+    @apply w-full bg-white shadow-md rounded-xl;
+  }
+
+  .admin-layout__nav {
+    @apply sticky flex flex-col justify-between max-h-screen space-y-2 rounded-md top-4 w-72;
+  }
+
+  .admin-layout__nav a {
+    @apply flex items-center gap-2 p-2 h-11 rounded-xl bg-gradient-to-r from-white/50 hover:bg-slate-300;
+  }
+
+  .admin-layout__nav a svg {
+    @apply h-5;
+  }
+
+  .admin-layout__nav hr {
+    @apply mb-2 h-0.5 border-0 bg-gradient-to-r from-slate-300;
+  }
+
+  .admin-version__info {
+    @apply py-2 text-xs text-slate-400;
+  }
+}
