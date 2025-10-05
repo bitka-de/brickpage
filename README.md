@@ -1,4 +1,3 @@
-````markdown
 <img src="./public/img/logo.png" alt="Brickpage — Logo" style="width:360px;max-width:100%;height:auto;display:block;margin:0;">
 
 ## Task #7: Admin Dashboard Komplett-Ausbau & Settings Controller - 5. Oktober 2025
